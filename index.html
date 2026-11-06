@@ -1,0 +1,913 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>GMC Global Management Consulting</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+<style>
+/* Layout concept: sticky frosted nav over a navy engineering-drawing hero; light slate service/compliance bands; dark schematic gallery tiles; navy footer. */
+:root{
+  --bg:#FFFFFF; --surface:#F4F6F9; --surface-2:#E8ECF2; --ink:#0B1325; --ink-2:#4A566E; --line:#D9DFE9;
+  --accent-text:#8A6A0A; --red-text:#B71C1C; --focus:#B7791F;
+  --nav-bg:rgba(255,255,255,.84); --card-shadow:0 1px 2px rgba(11,19,37,.06),0 8px 24px rgba(11,19,37,.06);
+  --gold:#D4AF37; --amber:#E5A93C; --red:#D32F2F;
+  --navy:#0B1325; --navy-2:#141E38; --navy-line:#26335A; --on-navy:#F4F6F9; --on-navy-2:#A9B4CB;
+  --font-ui:"Plus Jakarta Sans","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Inter","Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1020; --surface:#111A32; --surface-2:#1A2542; --ink:#EEF1F7; --ink-2:#A9B4CB; --line:#26335A;
+  --accent-text:#E5A93C; --red-text:#FF8A80; --focus:#E5A93C;
+  --nav-bg:rgba(10,16,32,.82); --card-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1020; --surface:#111A32; --surface-2:#1A2542; --ink:#EEF1F7; --ink-2:#A9B4CB; --line:#26335A;
+  --accent-text:#E5A93C; --red-text:#FF8A80; --focus:#E5A93C;
+  --nav-bg:rgba(10,16,32,.82); --card-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--font-body);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--font-ui);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--font-mono);font-weight:500;letter-spacing:.02em}
+.wrap{max-width:1200px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sec{padding-block:72px;scroll-margin-top:72px}
+.eyebrow{font:600 .72rem/1 var(--font-mono);text-transform:uppercase;letter-spacing:.14em;color:var(--accent-text)}
+.sec-head{display:grid;gap:12px;max-width:720px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(1.65rem,3.6vw,2.4rem);font-weight:800}
+.sec-head p{color:var(--ink-2);font-size:1.05rem}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:6px;border:1.5px solid transparent;font:700 .92rem/1 var(--font-ui);text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s,border-color .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--amber);color:#0B1325;box-shadow:0 6px 18px rgba(229,169,60,.28)}
+.btn-gold:hover{background:var(--gold)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:#B71C1C}
+.btn-ghost{background:transparent;color:var(--on-navy);border-color:rgba(244,246,249,.35)}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+.btn-line{background:var(--bg);color:var(--ink);border-color:var(--line)}
+.btn-line:hover{border-color:var(--amber)}
+.btn-wa{background:#128C4A;color:#fff}
+.btn-wa:hover{background:#0F7A41}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--nav-bg);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;min-height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.brand svg{width:40px;height:46px;flex:none}
+.brand-text{display:grid;gap:2px;min-width:0}
+.brand-text b{font:800 1.1rem/1 var(--font-ui);letter-spacing:.08em}
+.brand-text span{font:600 .58rem/1.25 var(--font-ui);letter-spacing:.1em;color:var(--ink-2);text-transform:uppercase}
+.nav-spacer{flex:1}
+.hdr-call{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;background:var(--red);color:#fff}
+.hdr-call svg{width:20px;height:20px}
+.burger{width:44px;height:44px;border:1px solid var(--line);border-radius:6px;background:var(--bg);display:inline-flex;align-items:center;justify-content:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:18px;height:2px;background:var(--ink);position:relative;transition:transform .2s,background .2s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+#site-nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);max-height:calc(100vh - 80px);overflow-y:auto;padding:8px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px));box-shadow:var(--card-shadow)}
+#site-nav.open{display:block}
+.nav-list>li>a,.nav-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 4px;background:none;border:0;border-bottom:1px solid var(--line);font:700 .98rem/1.2 var(--font-ui);text-decoration:none;text-align:left}
+.nav-btn svg{width:14px;height:14px;transition:transform .2s}
+.has-menu.open .nav-btn svg{transform:rotate(180deg)}
+.menu{padding:4px 0 8px 14px}
+.menu a{display:block;padding:10px 4px;text-decoration:none;color:var(--ink-2);font-weight:500;font-size:.92rem}
+.menu a:hover{color:var(--ink)}
+.nav-cta-mobile{display:grid;gap:10px;margin-top:16px}
+.hdr-actions{display:none}
+@media (min-width:1100px){
+  .burger,.hdr-call,.nav-cta-mobile{display:none}
+  #site-nav{display:block;position:static;border:0;box-shadow:none;max-height:none;overflow:visible;padding:0;background:none;flex:1}
+  .nav-list{display:flex;justify-content:center;gap:4px}
+  .nav-list>li{position:relative}
+  .nav-list>li>a,.nav-btn{border:0;padding:10px 14px;width:auto;gap:6px;border-radius:6px;font-size:.9rem}
+  .nav-list>li>a:hover,.nav-btn:hover{background:var(--surface)}
+  .menu{display:none;position:absolute;top:100%;left:0;min-width:250px;padding:8px;background:var(--bg);border:1px solid var(--line);border-radius:8px;box-shadow:var(--card-shadow)}
+  .has-menu.open .menu{display:block}
+  .menu a{padding:10px 12px;border-radius:6px}
+  .menu a:hover{background:var(--surface)}
+  .hdr-actions{display:flex;align-items:center;gap:10px}
+  .hdr-actions .btn{min-height:44px;padding:0 14px;font-size:.82rem}
+  .hdr-emerg{flex-direction:column;gap:3px;align-items:flex-start;line-height:1}
+  .hdr-emerg small{font:700 .6rem/1 var(--font-ui);letter-spacing:.06em;text-transform:uppercase;opacity:.92}
+  .hdr-emerg b{font:700 .88rem/1 var(--font-mono)}
+}
+@media (hover:hover) and (min-width:1100px){.has-menu:hover .menu{display:block}}
+
+/* hero */
+.hero{background:var(--navy);color:var(--on-navy);position:relative;overflow:hidden;
+  background-image:radial-gradient(900px 420px at 88% -10%,rgba(229,169,60,.16),transparent 60%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:auto,32px 32px,32px 32px}
+.hero .wrap{display:grid;gap:40px;padding-block:56px 0}
+.hero-copy{display:grid;gap:22px;align-content:start;min-width:0}
+.hero .eyebrow{color:var(--amber)}
+.hero h1{font-size:clamp(2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero-sub{color:var(--on-navy-2);font-size:1.08rem;max-width:58ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.cta-row .btn{flex:1 1 220px}
+.trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:6px}
+.trust li{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--navy-line);border-radius:6px;background:rgba(20,30,56,.7);font:600 .78rem/1.25 var(--font-ui);min-width:0}
+.trust li svg{width:16px;height:16px;flex:none;color:var(--amber)}
+.trust li.uen{grid-column:1/-1;font-family:var(--font-mono);font-size:.76rem;letter-spacing:.04em}
+.hero-visual{display:grid;grid-template-columns:1fr;gap:12px;min-width:0}
+.vis{position:relative;border:1px solid var(--navy-line);border-radius:10px;overflow:hidden;background:#0F1A33}
+.vis svg{display:block;width:100%;height:auto;aspect-ratio:16/10}
+.vis figcaption{position:absolute;left:10px;bottom:10px;padding:6px 10px;border-radius:999px;background:rgba(11,19,37,.88);border:1px solid var(--navy-line);font:600 .68rem/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--on-navy)}
+.hero-foot{height:28px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.25))}
+@media (min-width:560px){.hero-visual{grid-template-columns:1fr 1fr}.trust{grid-template-columns:repeat(3,minmax(0,1fr))}.trust li.uen{grid-column:auto}}
+@media (min-width:1000px){.hero .wrap{grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:72px 0}.hero-visual{grid-template-columns:1fr}.trust{grid-template-columns:repeat(2,minmax(0,1fr))}.trust li.uen{grid-column:1/-1}}
+@media (min-width:1280px){.trust{grid-template-columns:repeat(3,minmax(0,1fr))}.trust li.uen{grid-column:auto}}
+
+/* services */
+.tabs{display:grid;gap:8px;margin-bottom:20px}
+.tab{display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);transition:border-color .15s,background .15s,transform .15s}
+.tab:hover{border-color:var(--amber);transform:translateY(-1px)}
+.tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
+.tab .div{flex:none;width:34px;height:34px;border-radius:6px;display:grid;place-items:center;background:var(--surface-2);font:800 .95rem/1 var(--font-mono);color:var(--ink)}
+.tab[aria-selected="true"] .div{background:var(--amber);color:#0B1325}
+.tab b{display:block;font:700 .95rem/1.25 var(--font-ui)}
+.tab small{display:block;font-size:.76rem;color:var(--ink-2);margin-top:2px}
+.tab[aria-selected="true"] small{color:var(--on-navy-2)}
+.panel{display:grid;gap:20px;min-width:0}
+.panel[hidden]{display:none}
+.panel-main h3{font-size:clamp(1.3rem,2.6vw,1.7rem);font-weight:800;margin-bottom:8px}
+.panel-main>p{color:var(--ink-2);margin-bottom:20px;max-width:62ch}
+.scope{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.scope li{padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:grid;gap:6px;transition:border-color .15s,box-shadow .15s}
+.scope li:hover{border-color:var(--amber);box-shadow:var(--card-shadow)}
+.scope b{font:700 .95rem/1.3 var(--font-ui);display:flex;gap:8px;align-items:flex-start}
+.scope b svg{width:16px;height:16px;flex:none;margin-top:2px;color:var(--accent-text)}
+.scope span{font-size:.88rem;color:var(--ink-2)}
+.glance{background:var(--navy);color:var(--on-navy);border-radius:10px;padding:22px;display:grid;gap:16px;align-content:start}
+.glance h4{font:700 .72rem/1 var(--font-mono);text-transform:uppercase;letter-spacing:.14em;color:var(--amber)}
+.glance dl{margin:0;display:grid;gap:12px}
+.glance dt{font:600 .7rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--on-navy-2);margin-bottom:4px}
+.glance dd{margin:0;font-size:.92rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:4px 9px;border:1px solid var(--navy-line);border-radius:999px;font:500 .74rem/1.2 var(--font-mono);background:var(--navy-2)}
+.glance .btn{width:100%}
+@media (min-width:800px){.tabs{grid-template-columns:repeat(3,1fr)}.panel{grid-template-columns:minmax(0,1fr) 300px;gap:28px}}
+
+/* compliance */
+.compliance{background:var(--surface)}
+.comp-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.comp-card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;gap:12px;align-content:start;transition:box-shadow .2s,transform .2s}
+.comp-card:hover{box-shadow:var(--card-shadow);transform:translateY(-3px)}
+.code-tag{justify-self:start;padding:5px 10px;border-radius:4px;background:var(--navy);color:var(--amber);font:600 .78rem/1 var(--font-mono);letter-spacing:.06em}
+.comp-card h3{font-size:1.15rem;font-weight:800}
+.comp-card p{color:var(--ink-2);font-size:.94rem}
+.comp-card ul{display:grid;gap:8px;font-size:.9rem}
+.comp-card li{display:flex;gap:8px}
+.comp-card li svg{width:16px;height:16px;flex:none;margin-top:3px;color:var(--accent-text)}
+.badges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px;justify-items:center;margin:44px 0 8px}
+.badge{width:min(132px,100%);aspect-ratio:1;border-radius:50%;padding:5px;background:conic-gradient(from 210deg,#7A5C08,#F6E3A1,#D4AF37,#8A6A0A,#F6E3A1,#B8922A,#7A5C08);box-shadow:0 8px 20px rgba(11,19,37,.25);transition:transform .2s}
+.badge:hover{transform:rotate(-4deg) scale(1.04)}
+.badge div{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 30% 25%,#1B2A4F,#0B1325 70%);color:var(--on-navy);display:grid;place-content:center;text-align:center;gap:4px;border:1px solid rgba(212,175,55,.5)}
+.badge b{font:800 1.1rem/1 var(--font-ui);color:var(--amber)}
+.badge span{font:600 .56rem/1.2 var(--font-mono);letter-spacing:.14em;text-transform:uppercase}
+.workflow{margin-top:36px;display:grid;gap:0;border:1px solid var(--line);border-radius:10px;background:var(--bg);overflow:hidden}
+.workflow>div{padding:20px 22px;display:grid;gap:6px;border-bottom:1px solid var(--line)}
+.workflow>div:last-child{border-bottom:0}
+.workflow h4{font:700 1rem/1.2 var(--font-ui);display:flex;gap:10px;align-items:center}
+.workflow h4 i{font:600 .72rem/1 var(--font-mono);font-style:normal;padding:4px 7px;border-radius:4px;background:var(--surface-2)}
+.workflow p{font-size:.9rem;color:var(--ink-2)}
+@media (min-width:640px){.badges{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:820px){.workflow{grid-template-columns:repeat(3,1fr)}.workflow>div{border-bottom:0;border-right:1px solid var(--line)}.workflow>div:last-child{border-right:0}}
+
+/* gallery */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.filter{padding:10px 16px;border:1.5px solid var(--line);border-radius:999px;background:var(--bg);font:700 .84rem/1 var(--font-ui);transition:border-color .15s,background .15s}
+.filter:hover{border-color:var(--amber)}
+.filter[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
+.count{font:500 .76rem/1 var(--font-mono);color:var(--ink-2);margin-bottom:20px;min-height:1em}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.tile{background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s,transform .2s}
+.tile:hover{box-shadow:var(--card-shadow);transform:translateY(-3px)}
+.tile[hidden]{display:none}
+.tile-art{background:#0F1A33;overflow:hidden}
+.tile-art svg{display:block;width:100%;height:auto;aspect-ratio:16/10;transition:transform .5s}
+.tile:hover .tile-art svg{transform:scale(1.05)}
+.tile-body{padding:16px 18px 18px;display:grid;gap:10px;align-content:space-between}
+.tile-tag{font:600 .66rem/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text)}
+.tile h3{font:700 1rem/1.35 var(--font-ui);text-wrap:pretty}
+.tile a{font:700 .84rem/1 var(--font-ui);text-decoration:none;color:var(--ink);display:inline-flex;gap:6px;align-items:center;justify-self:start;border-bottom:2px solid var(--amber);padding-bottom:3px}
+.note{margin-top:20px;font-size:.8rem;color:var(--ink-2)}
+
+/* about */
+.about{background:var(--surface)}
+.about-grid{display:grid;gap:32px}
+.about-copy{display:grid;gap:16px;align-content:start}
+.about-copy p{color:var(--ink-2)}
+.facts{margin:8px 0 0;display:grid;gap:0;border:1px solid var(--line);border-radius:10px;background:var(--bg);overflow:hidden}
+.facts div{display:grid;gap:2px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.facts div:last-child{border-bottom:0}
+.facts dt{font:600 .68rem/1 var(--font-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2)}
+.facts dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.steps{display:grid;gap:0;counter-reset:s;border-left:2px solid var(--line);margin-left:14px}
+.steps li{position:relative;padding:0 0 26px 30px;counter-increment:s}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:counter(s);position:absolute;left:-15px;top:-2px;width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--amber);display:grid;place-items:center;font:700 .78rem/1 var(--font-mono)}
+.steps b{display:block;font:700 1rem/1.3 var(--font-ui);margin-bottom:4px}
+.steps span{font-size:.9rem;color:var(--ink-2)}
+@media (min-width:900px){.about-grid{grid-template-columns:1fr 1fr;gap:64px}}
+
+/* quote */
+.quote{background:var(--navy);color:var(--on-navy);background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:32px 32px}
+.quote .eyebrow{color:var(--amber)}
+.quote .sec-head p{color:var(--on-navy-2)}
+.quote-grid{display:grid;gap:28px;align-items:start}
+.quote-side{display:grid;gap:14px}
+.quote-side li{display:flex;gap:12px;padding:14px 16px;border:1px solid var(--navy-line);border-radius:8px;background:rgba(20,30,56,.7);font-size:.92rem;color:var(--on-navy-2)}
+.quote-side li b{color:var(--on-navy);display:block;font:700 .95rem/1.3 var(--font-ui);margin-bottom:2px}
+.quote-side svg{width:20px;height:20px;flex:none;color:var(--amber);margin-top:2px}
+.contact-line{font:500 .9rem/1.5 var(--font-mono);color:var(--on-navy)}
+.form-card{background:var(--bg);color:var(--ink);border-radius:12px;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,.35);min-width:0}
+.form-card h3{font-size:1.25rem;font-weight:800;margin-bottom:4px}
+.form-card .lead{font-size:.88rem;color:var(--ink-2);margin-bottom:18px}
+.fields{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.field{display:grid;gap:6px;min-width:0}
+label,.legend{font:700 .8rem/1.2 var(--font-ui)}
+label i,.legend i{font-style:normal;color:var(--red-text)}
+input[type=text],input[type=email],input[type=tel],textarea{width:100%;min-height:46px;padding:11px 12px;border:1.5px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:400 1rem/1.4 var(--font-body)}
+textarea{min-height:90px;resize:vertical}
+input:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+input:user-invalid{border-color:var(--red)}
+.phone{display:flex}
+.phone span{display:grid;place-items:center;padding:0 12px;border:1.5px solid var(--line);border-right:0;border-radius:6px 0 0 6px;background:var(--surface);font:600 .92rem/1 var(--font-mono)}
+.phone input{border-radius:0 6px 6px 0}
+fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opt span{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border:1.5px solid var(--line);border-radius:999px;font:600 .84rem/1 var(--font-ui);transition:background .15s,border-color .15s}
+.opt:hover span{border-color:var(--amber)}
+.opt input:checked+span{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
+.opt input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
+.upload{display:grid;gap:4px;padding:16px;border:2px dashed var(--line);border-radius:8px;background:var(--surface);cursor:pointer;transition:border-color .15s}
+.upload:hover,.upload:focus-within{border-color:var(--amber)}
+.upload input{font-size:.88rem;max-width:100%}
+.upload small{color:var(--ink-2);font-size:.78rem}
+.err{color:var(--red-text);font-size:.82rem;font-weight:600;min-height:1.1em}
+.form-actions{display:grid;gap:10px;margin-top:4px}
+.fine{font-size:.76rem;color:var(--ink-2)}
+.result{display:grid;gap:14px}
+.result[hidden]{display:none}
+.result h3{display:flex;gap:10px;align-items:center}
+.result h3 svg{width:26px;height:26px;color:#128C4A;flex:none}
+.result textarea{font:500 .78rem/1.5 var(--font-mono);min-height:210px;background:var(--surface)}
+@media (min-width:640px){.fields.two{grid-template-columns:1fr 1fr}.fields .full{grid-column:1/-1}.form-card{padding:32px}.form-actions{grid-template-columns:1fr 1fr}}
+@media (min-width:980px){.quote-grid{grid-template-columns:.8fr 1.2fr;gap:48px}}
+
+/* footer */
+.site-footer{background:#070C1A;color:var(--on-navy);padding-block:56px 36px}
+.foot-grid{display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.foot-brand{display:grid;gap:12px;align-content:start}
+.foot-brand .brand-text span{color:var(--on-navy-2)}
+.foot-brand p{font-size:.88rem;color:var(--on-navy-2);max-width:34ch}
+.site-footer h4{font:700 .7rem/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+.site-footer li{margin-bottom:8px;font-size:.92rem;color:var(--on-navy-2);overflow-wrap:anywhere}
+.site-footer a{text-decoration:none}
+.site-footer a:hover{color:var(--amber)}
+.foot-contact li{color:var(--on-navy)}
+.foot-contact .mono{font-size:.88rem}
+.copy{margin-left:6px;padding:3px 8px;border:1px solid var(--navy-line);border-radius:4px;background:transparent;color:var(--on-navy-2);font:600 .66rem/1.2 var(--font-mono);text-transform:uppercase;letter-spacing:.06em}
+.copy:hover{border-color:var(--amber);color:var(--amber)}
+.legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--navy-line);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:.8rem;color:var(--on-navy-2)}
+
+/* mobile action bar + toast */
+.dock{display:none}
+@media (max-width:759px){
+  .dock{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--navy-line);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 20px rgba(0,0,0,.25)}
+  .dock a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:56px;padding:6px;text-decoration:none;color:#fff;font:700 .7rem/1.1 var(--font-ui);padding-left:max(6px,env(safe-area-inset-left,0px))}
+  .dock a:last-child{padding-right:max(6px,env(safe-area-inset-right,0px))}
+  .dock svg{width:20px;height:20px}
+  .dock .d-call{background:var(--red)}.dock .d-wa{background:#128C4A}.dock .d-quote{background:var(--navy);color:var(--amber)}
+  .site-footer{padding-bottom:96px}
+  .sec{padding-block:56px}
+}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:70;max-width:min(92vw,420px);padding:12px 16px;border-radius:8px;background:var(--navy);color:var(--on-navy);border:1px solid var(--amber);font:600 .86rem/1.4 var(--font-ui);transition:opacity .25s,transform .25s;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:759px){.toast{bottom:84px}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* photo edition: navy and gold brand header, photo surfaces */
+body::before{background:#080E1E}
+.site-header{--nav-bg:rgba(8,14,30,.9);background:var(--nav-bg);border-bottom:1px solid rgba(212,175,55,.4)}
+.brand img{width:44px;height:auto;flex:none;display:block}
+.brand-text b{font:800 1.55rem/1 var(--font-ui);letter-spacing:.06em;background:linear-gradient(180deg,#F6E3A1,#D4AF37 60%,#B8922A);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-text span{color:var(--on-navy-2)}
+.site-header .nav-list>li>a,.site-header .nav-btn{color:var(--on-navy);border-bottom-color:var(--navy-line)}
+.site-header .menu a{color:var(--on-navy-2)}
+.site-header .menu a:hover{color:var(--amber)}
+.burger{background:transparent;border-color:var(--navy-line)}
+.burger span::before,.burger span::after{background:var(--on-navy)}
+.burger span{background:var(--on-navy)}
+#site-nav{background:#0B1325;border-bottom-color:var(--navy-line)}
+.site-header .btn-line{background:transparent;color:var(--on-navy);border-color:rgba(244,246,249,.35)}
+.site-header .btn-line:hover{border-color:var(--amber);color:var(--amber)}
+@media (min-width:1100px){
+  #site-nav{background:none}
+  .site-header .nav-list>li>a:hover,.site-header .nav-btn:hover{background:rgba(255,255,255,.08)}
+  .site-header .menu{background:#0B1325;border-color:var(--navy-line)}
+  .site-header .menu a:hover{background:rgba(255,255,255,.08)}
+}
+.hero-visual{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:clamp(360px,100vw,540px)}
+.vis{margin:0;padding:3px;border:1px solid rgba(212,175,55,.6);min-height:0}
+.vis img{display:block;width:100%;height:100%;object-fit:cover;border-radius:7px}
+.vis.m1{grid-row:1/3}
+.svc9{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:8px;margin:0 0 32px}
+.svc9 li{display:flex;gap:10px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);font:700 .88rem/1.3 var(--font-ui)}
+.svc9 svg{width:16px;height:16px;flex:none;color:var(--accent-text)}
+.glance-img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid rgba(212,175,55,.5);display:block}
+.fire-grid{display:grid;gap:28px}
+.fire-copy{display:grid;gap:14px;align-content:start}
+.fire-copy h3{font-size:1.3rem;font-weight:800}
+.fire-copy p{color:var(--ink-2)}
+.why{display:grid;gap:12px}
+.why li{display:flex;gap:12px}
+.why svg{width:20px;height:20px;flex:none;color:var(--accent-text);margin-top:2px}
+.why b{display:block;font:700 1rem/1.3 var(--font-ui)}
+.why span{color:var(--ink-2);font-size:.92rem}
+.fire-card{border:1px solid #C9A646;border-radius:10px;padding:24px;background:linear-gradient(135deg,#FBF4D8,#F1E0A0 55%,#E6CB6B);color:#0B1325;box-shadow:var(--card-shadow)}
+.fire-card h3{font-size:1.25rem;font-weight:800;margin-bottom:16px}
+.fire-card ol{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:f}
+.fire-card li{counter-increment:f;padding-left:36px;position:relative}
+.fire-card li::before{content:counter(f);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:#0B1325;color:#E5A93C;display:grid;place-items:center;font:700 .72rem/1 var(--font-mono)}
+.fire-card b{display:block;font:700 .98rem/1.3 var(--font-ui)}
+.fire-card span{font-size:.88rem;color:#3A4560}
+.strip{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));margin-top:32px}
+.strip img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:2px solid var(--gold)}
+@media (min-width:900px){.fire-grid{grid-template-columns:1fr 1fr;gap:48px}}
+.compliance{background-color:var(--navy);color:var(--on-navy);background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:32px 32px}
+.compliance .eyebrow{color:var(--amber)}
+.compliance .sec-head p{color:var(--on-navy-2)}
+.compliance .comp-card{background:var(--navy-2);border-color:var(--navy-line)}
+.compliance .comp-card p,.compliance .comp-card ul{color:var(--on-navy-2)}
+.compliance .comp-card li svg{color:var(--amber)}
+.compliance .code-tag{background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.5)}
+.compliance .workflow{background:var(--navy-2);border-color:var(--navy-line)}
+.compliance .workflow>div{border-color:var(--navy-line)}
+.compliance .workflow h4 i{background:var(--navy-line);color:var(--amber)}
+.compliance .workflow p{color:var(--on-navy-2)}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px 28px}
+.badges img{height:112px;width:auto;max-width:100%;border-radius:6px;transition:transform .2s}
+.badges img:hover{transform:translateY(-3px)}
+.grid{display:block;column-width:250px;column-gap:18px}
+.tile{display:block;margin:0 0 18px;break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+.tile-art img{display:block;width:100%;height:auto;transition:transform .5s}
+.tile:hover .tile-art img{transform:scale(1.05)}
+.tile-body{display:grid;gap:10px}
+.about-photo{margin:8px 0 0;max-width:440px;padding:4px;border:1px solid var(--gold);border-radius:10px;background:var(--navy)}
+.about-photo img{display:block;width:100%;height:auto;border-radius:7px}
+</style>
+
+<!-- shared drawing library: shield logo + schematic illustrations -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6E3A1"/><stop offset=".45" stop-color="#D4AF37"/><stop offset="1" stop-color="#8A6A0A"/></linearGradient>
+    <pattern id="bp" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/></pattern>
+    <marker id="ah" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#4FA3D9"/></marker>
+  </defs>
+
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.500l3.200 3.200L13 4.800" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.500l5.500 2v4c0 3.200-2.300 5.600-5.500 7-3.200-1.400-5.500-3.800-5.500-7v-4z" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linejoin="round"/><path d="M5.500 8l1.800 1.800L10.800 6" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.600 3h3l1.500 4-2 1.300a11 11 0 0 0 5.600 5.600l1.300-2 4 1.500v3a2.500 2.500 0 0 1-2.700 2.500A15.500 15.500 0 0 1 4 5.700 2.500 2.500 0 0 1 6.600 3z" fill="currentColor"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.500a9.500 9.500 0 0 0-8.100 14.400L2.500 21.500l4.700-1.300A9.500 9.500 0 1 0 12 2.500zm0 1.800a7.700 7.700 0 1 1-4 14.300l-.3-.2-2.700.8.8-2.600-.2-.3A7.700 7.700 0 0 1 12 4.300zm-3 3.600c-.2 0-.5.100-.7.400-.3.300-1 1-1 2.400s1 2.800 1.200 3c.1.200 2 3.100 4.900 4.300 2.400 1 2.900.8 3.400.7.500-.1 1.700-.7 1.900-1.400.2-.7.200-1.200.2-1.400-.1-.1-.3-.2-.7-.4l-1.900-.9c-.3-.1-.5-.1-.7.100l-.9 1.100c-.2.200-.3.200-.7.100-.3-.2-1.300-.5-2.400-1.500-.9-.8-1.500-1.800-1.700-2.100-.2-.3 0-.5.100-.6l.5-.6.3-.5c.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z" fill="currentColor"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6zM14 3v5h5M9 13h7M9 17h7" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 14 14"><path d="M2 5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="GMC Global Management Consulting Pte Ltd, home">
+      <img src="img/logo-shield.png" alt="" width="44" height="47">
+      <span class="brand-text"><b>GMC</b><span>Global Management<br>Consulting Pte Ltd</span></span>
+    </a>
+    <nav id="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        <li class="has-menu">
+          <button class="nav-btn" type="button" aria-expanded="false" aria-haspopup="true">Services <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
+          <div class="menu">
+            <a href="#services" data-tab="fire">Fire Protection</a>
+            <a href="#services" data-tab="acmv">ACMV / HVAC</a>
+            <a href="#services" data-tab="civil">General Construction</a>
+            <a href="#services" data-tab="civil">Scaffolding</a>
+          </div>
+        </li>
+        <li class="has-menu">
+          <button class="nav-btn" type="button" aria-expanded="false" aria-haspopup="true">Compliance <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
+          <div class="menu">
+            <a href="#compliance">bizSAFE Level 3</a>
+            <a href="#compliance">BCA Registration</a>
+            <a href="#compliance">SCDF Submissions</a>
+          </div>
+        </li>
+        <li><a href="#gallery">Project Gallery</a></li>
+        <li><a href="#about">About Us</a></li>
+      </ul>
+      <div class="nav-cta-mobile">
+        <a class="btn btn-red" href="tel:+6590626319">Emergency Service · +65 9062 6319</a>
+        <a class="btn btn-gold" href="#quote">Request Site Inspection</a>
+        <a class="btn btn-line" href="#quote" data-profile>Download Company Profile (PDF)</a>
+      </div>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="hdr-actions">
+      <a class="btn btn-red hdr-emerg" href="tel:+6590626319"><small>Emergency / Site Inspection</small><b>+65 9062 6319</b></a>
+      <a class="btn btn-line" href="#quote" data-profile><svg aria-hidden="true"><use href="#i-doc"/></svg>Company Profile (PDF)</a>
+    </div>
+    <a class="hdr-call" href="tel:+6590626319" aria-label="Call +65 9062 6319"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">MEP · Fire Protection · Civil Works</span>
+        <h1>Integrated Building Services &amp; <em>MEP Engineering Excellence</em> in Singapore</h1>
+        <p class="hero-sub">BCA-registered, bizSAFE Level 3 certified, and SCDF-compliant contractor specializing in turnkey fire suppression, industrial ACMV systems, and structural works.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold" href="#quote">Request Site Inspection</a>
+          <a class="btn btn-ghost" href="#services">Explore Services <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <ul class="trust" aria-label="Credentials">
+          <li><svg aria-hidden="true"><use href="#i-shield"/></svg>bizSAFE Level 3 Certified</li>
+          <li><svg aria-hidden="true"><use href="#i-shield"/></svg>BCA Registered</li>
+          <li><svg aria-hidden="true"><use href="#i-shield"/></svg>SCDF Compliant</li>
+          <li><svg aria-hidden="true"><use href="#i-shield"/></svg>SS 575 Code Adherence</li>
+          <li class="uen"><svg aria-hidden="true"><use href="#i-shield"/></svg>UEN: 202428226K</li>
+        </ul>
+      </div>
+      <div class="hero-visual">
+        <figure class="vis m1"><img src="img/pipework-install.jpg" alt="GMC technicians installing black steel pipework on site" width="316" height="508" fetchpriority="high"><figcaption>MEP pipework</figcaption></figure>
+        <figure class="vis m2"><img src="img/fm200-bank.jpg" alt="FM200 clean agent suppression cylinder bank" width="291" height="508"><figcaption>FM200 clean agent</figcaption></figure>
+        <figure class="vis m3"><img src="img/facp-commissioning.jpg" alt="GMC engineer testing a fire alarm control panel with a multimeter" width="615" height="471"><figcaption>FACP commissioning</figcaption></figure>
+      </div>
+    </div>
+    <div class="hero-foot"></div>
+  </section>
+
+  <section class="sec" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Core service hubs</span>
+        <h2>Three divisions. One accountable project team.</h2>
+        <p>Fire protection, mechanical engineering and civil works are planned together, so trades do not wait on each other and inspections are not a surprise.</p>
+      </div>
+
+      <p class="eyebrow" style="margin-bottom:12px">All company services</p>
+      <ul class="svc9" aria-label="Company services"><li><svg aria-hidden="true"><use href="#i-check"/></svg>General Construction</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Structural</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Electrical</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Plumbing</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Renovation</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Scaffolding</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Project Management</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Maintenance</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Fire Protection &amp; Sprinkler System</li></ul>
+
+      <div class="tabs" role="tablist" aria-label="Service divisions">
+        <button class="tab" role="tab" id="tab-fire" aria-controls="panel-fire" aria-selected="true" data-tab="fire"><span class="div">A</span><span><b>Fire Protection</b><small>SCDF-approved systems</small></span></button>
+        <button class="tab" role="tab" id="tab-acmv" aria-controls="panel-acmv" aria-selected="false" tabindex="-1" data-tab="acmv"><span class="div">B</span><span><b>ACMV &amp; Mechanical</b><small>Industrial engineering</small></span></button>
+        <button class="tab" role="tab" id="tab-civil" aria-controls="panel-civil" aria-selected="false" tabindex="-1" data-tab="civil"><span class="div">C</span><span><b>Civil &amp; Access</b><small>Structural, scaffolding, fit-out</small></span></button>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-fire" aria-labelledby="tab-fire">
+        <div class="panel-main">
+          <h3>SCDF-Approved Fire Protection Systems</h3>
+          <p>Installation, testing and paperwork for buildings that cannot afford a failed inspection, from office floors to server halls.</p>
+          <ul class="scope">
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Commercial Fire Sprinklers</b><span>Black steel mains, risers and branch lines installed, hung and pressure tested.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>FM200 Clean-Agent Suppression</b><span>Cylinder banks, manifolds and discharge piping for server rooms and data centres.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Fire Alarm Control Panels (FACP)</b><span>Panel installation, loop wiring and commissioning.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Fire Hose Reel Systems</b><span>Reels, pipework and connections installed to code.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Testing &amp; Commissioning</b><span>Pressure and flow tests carried out and recorded.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Full SCDF Documentation</b><span>Submission drawings, test reports and endorsement paperwork.</span></li>
+          </ul>
+        </div>
+        <aside class="glance" aria-label="Fire protection at a glance">
+          <img class="glance-img" src="img/fm200-bank.jpg" alt="FM200 cylinder bank" width="291" height="508" loading="lazy" style="object-position:50% 35%">
+          <h4>At a glance</h4>
+          <dl>
+            <div><dt>Codes</dt><dd class="chips"><span class="chip">SS 575</span><span class="chip">SCDF</span></dd></div>
+            <div><dt>Typical sites</dt><dd>Data centres, commercial buildings, industrial facilities</dd></div>
+            <div><dt>Handover</dt><dd>Test records and SCDF documentation</dd></div>
+          </dl>
+          <a class="btn btn-gold" href="#quote" data-service="Fire Protection">Quote fire protection</a>
+        </aside>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-acmv" aria-labelledby="tab-acmv" hidden>
+        <div class="panel-main">
+          <h3>ACMV &amp; Industrial Mechanical Engineering</h3>
+          <p>Air and chilled water systems fabricated, installed and checked against live readings before handover.</p>
+          <ul class="scope">
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>HVAC Ductwork Fabrication</b><span>Large-section ductwork fabricated, hung and sealed on site.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>AHU Installation</b><span>Air handling units positioned, connected and aligned.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Chilled Water Diagnostics</b><span>Supply and return circuits checked for pressure and balance.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>6-Point Pressure Manifold Calibration</b><span>Six gauge points across supply and return calibrated and logged.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>ACMV Automation Panels</b><span>Control panels wired and tested with the plant they run.</span></li>
+          </ul>
+        </div>
+        <aside class="glance" aria-label="ACMV at a glance">
+          <img class="glance-img" src="img/ahu.jpg" alt="Air handling unit and ductwork" width="417" height="249" loading="lazy">
+          <h4>At a glance</h4>
+          <dl>
+            <div><dt>Systems</dt><dd class="chips"><span class="chip">AHU</span><span class="chip">Chilled water</span><span class="chip">Ductwork</span></dd></div>
+            <div><dt>Typical sites</dt><dd>Data centres, factories, commercial floors</dd></div>
+            <div><dt>Handover</dt><dd>Calibration and airflow readings</dd></div>
+          </dl>
+          <a class="btn btn-gold" href="#quote" data-service="ACMV/HVAC">Quote ACMV works</a>
+        </aside>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-civil" aria-labelledby="tab-civil" hidden>
+        <div class="panel-main">
+          <h3>Civil, Structural &amp; Access Services</h3>
+          <p>The builder's work around the systems: framing, access, renovation and the project management that ties it together.</p>
+          <ul class="scope">
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Structural Framing</b><span>Steel and support framing for plant, platforms and services.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>MOM-Compliant Scaffolding</b><span>Erected and inspected scaffolding with fall-arrest provisions.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Commercial Renovations</b><span>Fit-out and reinstatement of occupied commercial space.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Sanitary Plumbing</b><span>Supply, waste and sanitary pipework.</span></li>
+            <li><b><svg aria-hidden="true"><use href="#i-check"/></svg>Project Management Lifecycle</b><span>One team from site survey through to handover.</span></li>
+          </ul>
+        </div>
+        <aside class="glance" aria-label="Civil works at a glance">
+          <img class="glance-img" src="img/scaffolding.jpg" alt="Crew working on scaffolding" width="214" height="366" loading="lazy" style="object-position:50% 40%">
+          <h4>At a glance</h4>
+          <dl>
+            <div><dt>Safety</dt><dd class="chips"><span class="chip">MOM</span><span class="chip">bizSAFE 3</span></dd></div>
+            <div><dt>Typical sites</dt><dd>Commercial, industrial and residential projects</dd></div>
+            <div><dt>Delivery</dt><dd>Turnkey, with a single point of contact</dd></div>
+          </dl>
+          <a class="btn btn-gold" href="#quote" data-service="Scaffolding">Quote civil works</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="fire-protection">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Clean · Compliant · SCDF Approved</span>
+        <h2>Fire Protection: Fire Sprinkler System Installation</h2>
+        <p>Detecting, suppressing and controlling fire hazards in line with Singapore Civil Defence Force regulations.</p>
+      </div>
+      <div class="fire-grid">
+        <div class="fire-copy">
+          <h3>What is fire protection?</h3>
+          <p>A comprehensive fire protection system safeguards lives, property and operations by detecting, suppressing and controlling fire hazards in compliance with Singapore Civil Defence Force (SCDF) regulations. Our installations deliver reliable fire safety infrastructure for commercial, industrial and residential buildings, with rapid response and peace of mind.</p>
+          <h3>Why choose us</h3>
+          <ul class="why">
+            <li><svg aria-hidden="true"><use href="#i-shield"/></svg><div><b>Compliant</b><span>Full adherence to SCDF &amp; SS 575 Code of Practice.</span></div></li>
+            <li><svg aria-hidden="true"><use href="#i-shield"/></svg><div><b>Safe</b><span>Designed for maximum reliability and occupant safety.</span></div></li>
+            <li><svg aria-hidden="true"><use href="#i-shield"/></svg><div><b>Innovative</b><span>Modern systems using advanced technology and quality materials.</span></div></li>
+          </ul>
+        </div>
+        <div class="fire-card">
+          <h3>Our fire protection services</h3>
+          <ol>
+            <li><b>Fire Sprinkler System Installation</b><span>Design and install compliant sprinkler systems for all building types.</span></li>
+            <li><b>FM200 Fire Suppression System Installation</b><span>Clean-agent system for data rooms and sensitive equipment.</span></li>
+            <li><b>Fire Protection Pipework Installation</b><span>Black steel pipework installed to approved standards.</span></li>
+            <li><b>Fire Alarm &amp; Hose Reel Systems</b><span>FACP wiring and commissioning, and hose reel cabinets.</span></li>
+            <li><b>Testing and Commissioning</b><span>Pressure testing, flow tests and performance verification.</span></li>
+            <li><b>SCDF Approval and Documentation</b><span>Submission, certification and approval support.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="strip">
+        <img src="img/hose-reel.jpg" alt="Red fire hose reel cabinet" width="294" height="508" loading="lazy" style="object-position:50% 45%">
+        <img src="img/ceiling-sprinkler.jpg" alt="Technician fitting a ceiling sprinkler head" width="300" height="508" loading="lazy" style="object-position:50% 25%">
+        <img src="img/pressure-gauge-test.jpg" alt="Technician testing a pressure gauge on a riser" width="412" height="484" loading="lazy" style="object-position:50% 30%">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec compliance" id="compliance">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Regulatory compliance &amp; safety assurance</span>
+        <h2>Built for Singapore's inspection regime.</h2>
+        <p>Every installation follows the codes the authorities check. Safety and paperwork are part of the scope, not an afterthought.</p>
+      </div>
+      <div class="comp-grid">
+        <article class="comp-card">
+          <span class="code-tag">SS 575</span>
+          <h3>Code adherence on every system</h3>
+          <p>Design, installation and testing follow the Singapore Standard codes referenced by SCDF's Fire Code.</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Installation checked against the code before testing</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Test results recorded for the authority</li>
+          </ul>
+        </article>
+        <article class="comp-card">
+          <span class="code-tag">bizSAFE LEVEL 3 · MOM</span>
+          <h3>MOM-aligned workplace safety</h3>
+          <p>bizSAFE Level 3 credentials back a safety system that covers every site crew and subcontractor.</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Work-at-height controls and fall-arrest on suspended works</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Site briefings before work starts</li>
+          </ul>
+        </article>
+        <article class="comp-card">
+          <span class="code-tag">SCDF · BCA</span>
+          <h3>Registered contractor, documented handover</h3>
+          <p>BCA-registered, with submissions prepared in-house so approval does not stall on paperwork.</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Drawings, reports and forms prepared by our team</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>One contact from first submission to endorsement</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="badges" aria-label="Accreditations">
+        <img src="img/badge-bizsafe.png" alt="bizSAFE Level 3 certified" width="208" height="124" loading="lazy">
+        <img src="img/badge-bca.png" alt="BCA registered, bizSAFE Level 3" width="196" height="168" loading="lazy">
+        <img src="img/badge-scdf.png" alt="SCDF approved" width="232" height="162" loading="lazy">
+      </div>
+
+      <div class="workflow" aria-label="SCDF workflow">
+        <div><h4><i>STEP 1</i>Submission</h4><p>Plans, calculations and forms prepared and lodged with the authority.</p></div>
+        <div><h4><i>STEP 2</i>Testing</h4><p>Pressure, flow and functional tests run on the installed system.</p></div>
+        <div><h4><i>STEP 3</i>Endorsement</h4><p>Reports compiled and presented for SCDF endorsement.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="gallery">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Project gallery</span>
+        <h2>Proven on-site works.</h2>
+        <p>A cross-section of the installations we deliver. Filter by discipline.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="filter" type="button" aria-pressed="true" data-filter="all">All</button>
+        <button class="filter" type="button" aria-pressed="false" data-filter="fire">Fire Protection</button>
+        <button class="filter" type="button" aria-pressed="false" data-filter="acmv">ACMV</button>
+        <button class="filter" type="button" aria-pressed="false" data-filter="site">Site Works</button>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div class="grid">
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/fm200-bank.jpg" alt="FM200 gas suppression cylinder bank" width="291" height="508" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>FM200 Clean Agent Gas Suppression Bank - Mission Critical Facility</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/black-steel-pipes.jpg" alt="Black steel sprinkler main line and riser" width="316" height="471" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>Black Steel Sprinkler Main Line &amp; Riser Installation</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/facp-commissioning.jpg" alt="Engineer commissioning a fire alarm control panel" width="615" height="471" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>Fire Alarm Control Panel (FACP) Wiring &amp; Commissioning</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv"><div class="tile-art"><img src="img/pump-pressure.jpg" alt="Supply and return pressure gauges being calibrated" width="418" height="260" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV</span><h3>Dual Supply/Return Chilled Water Pressure Manifold Calibration</h3><a href="#quote" data-service="ACMV/HVAC">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv"><div class="tile-art"><img src="img/ceiling-diffuser.jpg" alt="Technicians verifying airflow at a ceiling diffuser" width="417" height="260" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV</span><h3>Industrial Ceiling Diffuser Airflow &amp; Ventilation Verification</h3><a href="#quote" data-service="ACMV/HVAC">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv site"><div class="tile-art"><img src="img/hvac-duct.jpg" alt="Technician installing large ductwork" width="416" height="249" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV · Site Works</span><h3>Suspended Ductwork Installation with Full Fall-Arrest Scaffolding</h3><a href="#quote" data-service="Scaffolding">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/hose-reel.jpg" alt="Red fire hose reel cabinet" width="294" height="508" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>Fire Hose Reel Cabinet Installation</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/ceiling-sprinkler.jpg" alt="Technician installing a ceiling sprinkler head" width="300" height="508" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>Ceiling Sprinkler Head Installation</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/pressure-gauge-test.jpg" alt="Technician testing a pressure gauge" width="412" height="484" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>Riser Pressure Gauge Testing</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/fire-pump-room.jpg" alt="Red fire pumps with pressure gauges" width="406" height="486" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>Fire Pump Set &amp; Gauge Inspection</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="fire"><div class="tile-art"><img src="img/sprinkler-flow-test.jpg" alt="Team observing a sprinkler discharge test" width="412" height="486" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Fire Protection</span><h3>Sprinkler Discharge &amp; Coverage Test</h3><a href="#quote" data-service="Fire Protection">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv"><div class="tile-art"><img src="img/ahu.jpg" alt="Air handling unit connected to ductwork" width="417" height="249" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV</span><h3>FMU AHU Air Handling Unit Inspection &amp; Maintenance</h3><a href="#quote" data-service="ACMV/HVAC">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv"><div class="tile-art"><img src="img/acmv-panel.jpg" alt="ACMV control panel with touchscreen" width="416" height="260" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV</span><h3>ACMV Control Panel - System Monitoring &amp; Control</h3><a href="#quote" data-service="ACMV/HVAC">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv"><div class="tile-art"><img src="img/chilled-water-test.jpg" alt="Live pressure spray test on chilled water pipe" width="416" height="249" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV</span><h3>Chilled Water Pipe Live Pressure Spray Test</h3><a href="#quote" data-service="ACMV/HVAC">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv"><div class="tile-art"><img src="img/six-point-gauges.jpg" alt="Six pressure gauges being calibrated with spanners" width="416" height="260" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV</span><h3>6-Point Gauge Check - ACMV Pump Gauge Calibration</h3><a href="#quote" data-service="ACMV/HVAC">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="acmv"><div class="tile-art"><img src="img/refrigeration-gauges.jpg" alt="Refrigeration gauge manifold diagnostics" width="418" height="249" loading="lazy"></div><div class="tile-body"><span class="tile-tag">ACMV</span><h3>Refrigeration Gauges - Pressure Manifold Diagnostics</h3><a href="#quote" data-service="ACMV/HVAC">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="site"><div class="tile-art"><img src="img/scaffolding.jpg" alt="Crew erecting scaffolding" width="214" height="366" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Site Works</span><h3>Scaffolding Erection for Facade Works</h3><a href="#quote" data-service="Scaffolding">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="site"><div class="tile-art"><img src="img/switchgear-panel.jpg" alt="Electrician testing switchgear wiring" width="291" height="471" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Site Works</span><h3>Electrical Switchgear Wiring &amp; Testing</h3><a href="#quote" data-service="Turnkey Construction">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        <article class="tile" data-cat="site"><div class="tile-art"><img src="img/pipework-install.jpg" alt="Technicians installing industrial pipework" width="316" height="508" loading="lazy"></div><div class="tile-body"><span class="tile-tag">Site Works</span><h3>Industrial Pipework Installation</h3><a href="#quote" data-service="Turnkey Construction">Enquire about similar works <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></article>
+        </div>
+      
+    </div>
+  </section>
+
+  <section class="sec about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <span class="eyebrow">About us</span>
+        <h2 style="font-size:clamp(1.65rem,3.6vw,2.4rem);font-weight:800">One contractor for the systems, the structure and the paperwork.</h2>
+        <p>GMC GLOBAL MANAGEMENT CONSULTING PTE LTD is a Singapore-based integrated building services and construction specialist. We deliver safe, compliant and high-quality solutions across construction, mechanical &amp; electrical, and fire protection.</p>
+        <p>Holding UEN 202428226K, we partner with commercial and industrial clients to ensure regulatory compliance, safety and on-site excellence, from design and installation to commissioning and maintenance. Our team is committed to reliability, precision and professionalism on every project.</p>
+        <figure class="about-photo"><img src="img/sprinkler-flow-test.jpg" alt="GMC site team observing a sprinkler test" width="412" height="486" loading="lazy"></figure>
+        <dl class="facts">
+          <div><dt>Entity</dt><dd>GMC Global Management Consulting Pte Ltd</dd></div>
+          <div><dt>UEN</dt><dd class="mono">202428226K</dd></div>
+          <div><dt>Registered address</dt><dd>10 Jalan Besar #12-07 Sim Lim Tower, Singapore 208787</dd></div>
+          <div><dt>Disciplines</dt><dd>Fire protection · ACMV · Civil &amp; structural · Scaffolding</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:22px">How a project runs</h3>
+        <ol class="steps">
+          <li><b>Site inspection</b><span>We walk the site, read the drawings and confirm the scope.</span></li>
+          <li><b>Design and submission</b><span>Coordinated drawings and authority submissions prepared in-house.</span></li>
+          <li><b>Installation</b><span>Pipework, ductwork, panels and structure installed under bizSAFE controls.</span></li>
+          <li><b>Testing and commissioning</b><span>Pressure, flow, airflow and functional tests recorded.</span></li>
+          <li><b>Handover</b><span>Test records and endorsement documents delivered with the keys.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec quote" id="quote">
+    <div class="wrap quote-grid">
+      <div>
+        <div class="sec-head">
+          <span class="eyebrow">Site audit &amp; quotation</span>
+          <h2>Tell us about the site. We will come to you.</h2>
+          <p>Share the basics and your plans. Tender specs and floor plans help us scope accurately.</p>
+        </div>
+        <ul class="quote-side">
+          <li><svg aria-hidden="true"><use href="#i-clip"/></svg><div><b>Attach drawings</b>PDF or DWG floor plans and tender specifications.</div></li>
+          <li><svg aria-hidden="true"><use href="#i-wa"/></svg><div><b>Prefer to chat?</b>Message us on WhatsApp and send photos from site.</div></li>
+          <li><svg aria-hidden="true"><use href="#i-phone"/></svg><div><b>Urgent fault?</b><span class="contact-line">+65 9062 6319</span></div></li>
+        </ul>
+      </div>
+
+      <div class="form-card">
+        <form id="quote-form" novalidate>
+          <h3>Request a Site Audit</h3>
+          <p class="lead">Fields marked * are required.</p>
+          <div class="fields two">
+            <div class="field"><label for="f-name">Name <i>*</i></label><input type="text" id="f-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="f-company">Company name <i>*</i></label><input type="text" id="f-company" name="company" autocomplete="organization" required></div>
+            <div class="field"><label for="f-email">Official email <i>*</i></label><input type="email" id="f-email" name="email" autocomplete="email" required></div>
+            <div class="field"><label for="f-phone">Phone <i>*</i></label><div class="phone"><span>+65</span><input type="tel" id="f-phone" name="phone" inputmode="numeric" autocomplete="tel-national" placeholder="9XXX XXXX" pattern="[3689][0-9]{3} ?[0-9]{4}" required></div></div>
+            <fieldset class="full"><legend class="legend">Project type <i>*</i></legend>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="ptype" value="Commercial" required><span>Commercial</span></label>
+                <label class="opt"><input type="radio" name="ptype" value="Industrial"><span>Industrial</span></label>
+                <label class="opt"><input type="radio" name="ptype" value="Data Centre"><span>Data Centre</span></label>
+                <label class="opt"><input type="radio" name="ptype" value="Residential"><span>Residential</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="full"><legend class="legend">Service required <i>*</i></legend>
+              <div class="opts" id="svc-opts">
+                <label class="opt"><input type="checkbox" name="svc" value="Fire Protection"><span>Fire Protection</span></label>
+                <label class="opt"><input type="checkbox" name="svc" value="ACMV/HVAC"><span>ACMV / HVAC</span></label>
+                <label class="opt"><input type="checkbox" name="svc" value="Scaffolding"><span>Scaffolding</span></label>
+                <label class="opt"><input type="checkbox" name="svc" value="Turnkey Construction"><span>Turnkey Construction</span></label>
+                <label class="opt"><input type="checkbox" name="svc" value="Maintenance"><span>Maintenance</span></label>
+              </div>
+              <p class="err" id="svc-err" role="alert"></p>
+            </fieldset>
+            <div class="field full"><label for="f-notes">Site address and scope notes</label><textarea id="f-notes" name="notes" placeholder="Building, floor area, target dates"></textarea></div>
+            <div class="field full">
+              <label for="f-file">Floor plans or tender specs</label>
+              <div class="upload"><input type="file" id="f-file" name="file" accept=".pdf,.dwg,application/pdf"><small id="file-msg">PDF or DWG. You can also send files in the WhatsApp chat or by email.</small></div>
+              <p class="err" id="file-err" role="alert"></p>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-gold" type="submit">Prepare Site Audit Request</button>
+            <a class="btn btn-wa" id="wa-direct" href="https://wa.me/6590626319" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Chat on WhatsApp</a>
+          </div>
+          <p class="fine" style="margin-top:12px">Your details are used only to respond to this enquiry.</p>
+        </form>
+
+        <div class="result" id="result" hidden>
+          <h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12.500l3.300 3.300L17 9" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg>Your request is ready to send</h3>
+          <p class="lead" style="margin:0">Send it to our team on WhatsApp, or copy it into an email to <span class="mono">contact@globalmgcs.com</span>. Attach your drawings in the same message.</p>
+          <label class="sr" for="r-text">Enquiry text</label>
+          <textarea id="r-text" readonly></textarea>
+          <div class="form-actions">
+            <a class="btn btn-wa" id="wa-send" href="https://wa.me/6590626319" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
+            <button class="btn btn-line" type="button" id="r-copy">Copy enquiry</button>
+          </div>
+          <button class="btn btn-line" type="button" id="r-edit">Edit details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Back to top"><img src="img/logo-shield.png" alt="" width="44" height="47"><span class="brand-text"><b>GMC</b><span>Global Management<br>Consulting Pte Ltd</span></span></a>
+        <p>GMC GLOBAL MANAGEMENT CONSULTING PTE LTD</p>
+        <p class="mono" style="font-size:.82rem">UEN: 202428226K</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services" data-tab="fire">Fire Protection</a></li>
+          <li><a href="#services" data-tab="acmv">ACMV / HVAC</a></li>
+          <li><a href="#services" data-tab="civil">General Construction</a></li>
+          <li><a href="#services" data-tab="civil">Scaffolding</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#compliance">Compliance</a></li>
+          <li><a href="#gallery">Project Gallery</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#quote">Request Site Inspection</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="foot-contact">
+          <li>10 Jalan Besar #12-07 Sim Lim Tower, Singapore 208787</li>
+          <li><a class="mono" href="tel:+6590626319">+65 9062 6319</a><button class="copy" type="button" data-copy="+65 9062 6319">Copy</button></li>
+          <li><a class="mono" href="mailto:contact@globalmgcs.com">contact@globalmgcs.com</a><button class="copy" type="button" data-copy="contact@globalmgcs.com">Copy</button></li>
+          <li><a class="mono" href="https://www.globalmgcs.com" target="_blank" rel="noopener">www.globalmgcs.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><span>© 2024–2026 GMC Global Management Consulting Pte Ltd. All Rights Reserved.</span><span class="mono">UEN 202428226K</span></div>
+  </div>
+</footer>
+
+<nav class="dock" aria-label="Quick actions">
+  <a class="d-call" href="tel:+6590626319"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call</a>
+  <a class="d-wa" href="https://wa.me/6590626319" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="d-quote" href="#quote"><svg aria-hidden="true"><use href="#i-clip"/></svg>Inspection</a>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var toastEl=$('#toast'),toastT;
+  function toast(m){toastEl.textContent=m;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show')},3200)}
+
+  /* nav */
+  var nav=$('#site-nav'),burger=$('.burger');
+  function closeMenus(except){$$('.has-menu').forEach(function(li){if(li!==except){li.classList.remove('open');$('.nav-btn',li).setAttribute('aria-expanded','false')}})}
+  burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Close menu':'Open menu')});
+  $$('.nav-btn').forEach(function(b){b.addEventListener('click',function(){var li=b.parentNode,o=!li.classList.contains('open');closeMenus(li);li.classList.toggle('open',o);b.setAttribute('aria-expanded',o)})});
+  document.addEventListener('click',function(e){if(!e.target.closest('.has-menu'))closeMenus()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeMenus();nav.classList.remove('open');burger.setAttribute('aria-expanded','false')}});
+  $$('#site-nav a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');closeMenus()})});
+
+  /* tabs */
+  var tabs=$$('.tab');
+  function selectTab(id,focus){tabs.forEach(function(t){var on=t.dataset.tab===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on&&focus)t.focus();$('#panel-'+t.dataset.tab).hidden=!on})}
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){selectTab(t.dataset.tab)});
+    t.addEventListener('keydown',function(e){var k=e.key,n=null;if(k==='ArrowRight'||k==='ArrowDown')n=tabs[(i+1)%tabs.length];if(k==='ArrowLeft'||k==='ArrowUp')n=tabs[(i+tabs.length-1)%tabs.length];if(k==='Home')n=tabs[0];if(k==='End')n=tabs[tabs.length-1];if(n){e.preventDefault();selectTab(n.dataset.tab,true)}});
+  });
+  $$('a[data-tab]').forEach(function(a){a.addEventListener('click',function(){selectTab(a.dataset.tab)})});
+
+  /* gallery */
+  var filters=$$('.filter'),tiles=$$('.tile'),count=$('#count');
+  function applyFilter(f){var n=0;tiles.forEach(function(t){var show=f==='all'||t.dataset.cat.split(' ').indexOf(f)>-1;t.hidden=!show;if(show)n++});filters.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.filter===f)});count.textContent='Showing '+n+' of '+tiles.length+' projects'}
+  filters.forEach(function(b){b.addEventListener('click',function(){applyFilter(b.dataset.filter)})});
+  applyFilter('all');
+
+  /* form helpers */
+  var form=$('#quote-form'),result=$('#result');
+  function preselect(svc){$$('input[name=svc]').forEach(function(c){if(c.value===svc)c.checked=true})}
+  $$('[data-service]').forEach(function(a){a.addEventListener('click',function(){preselect(a.dataset.service)})});
+  $$('[data-profile]').forEach(function(a){a.addEventListener('click',function(){var n=$('#f-notes');if(n.value.indexOf('company profile')<0)n.value=(n.value?n.value+'\n':'')+'Please send the company profile (PDF).';toast('Complete your details below to receive the company profile.')})});
+
+  var fileIn=$('#f-file'),fileMsg=$('#file-msg'),fileErr=$('#file-err'),defMsg=fileMsg.textContent;
+  fileIn.addEventListener('change',function(){
+    fileErr.textContent='';var f=fileIn.files[0];
+    if(!f){fileMsg.textContent=defMsg;return}
+    if(!/\.(pdf|dwg)$/i.test(f.name)){fileErr.textContent='Choose a PDF or DWG file.';fileIn.value='';fileMsg.textContent=defMsg;return}
+    fileMsg.textContent=f.name+' ('+(f.size/1048576).toFixed(1)+' MB). Attach it again in the WhatsApp or email message.';
+  });
+
+  function buildMessage(){
+    var v=function(id){return $(id).value.trim()};
+    var svc=$$('input[name=svc]:checked').map(function(c){return c.value}).join(', ');
+    var pt=$('input[name=ptype]:checked');var f=fileIn.files[0];
+    var ph=v('#f-phone').replace(/\s+/g,'');
+    var lines=['Site audit request - GMC Global Management Consulting','Name: '+v('#f-name'),'Company: '+v('#f-company'),'Email: '+v('#f-email'),'Phone: +65 '+ph.slice(0,4)+' '+ph.slice(4),'Project type: '+(pt?pt.value:''),'Services: '+svc];
+    if(v('#f-notes'))lines.push('Notes: '+v('#f-notes'));
+    if(f)lines.push('Drawings: '+f.name+' (will attach in this chat)');
+    return lines.join('\n');
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var svcOk=$$('input[name=svc]:checked').length>0;
+    $('#svc-err').textContent=svcOk?'':'Select at least one service.';
+    if(!form.checkValidity()){form.reportValidity();return}
+    if(!svcOk){$('#svc-opts input').focus();return}
+    var msg=buildMessage();
+    $('#r-text').value=msg;
+    $('#wa-send').href='https://wa.me/6590626319?text='+encodeURIComponent(msg);
+    form.hidden=true;result.hidden=false;
+    result.scrollIntoView({block:'nearest'});
+  });
+  $$('input[name=svc]').forEach(function(c){c.addEventListener('change',function(){if($$('input[name=svc]:checked').length)$('#svc-err').textContent=''})});
+  $('#r-edit').addEventListener('click',function(){result.hidden=true;form.hidden=false});
+
+  function copyText(text,okMsg,src){
+    function fallback(){try{var t=src||document.createElement('textarea');if(!src){t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t)}t.select();var ok=document.execCommand('copy');if(!src)document.body.removeChild(t);toast(ok?okMsg:'Press Ctrl+C to copy the selected text.')}catch(err){toast('Select the text and copy it manually.')}}
+    try{navigator.clipboard.writeText(text).then(function(){toast(okMsg)},fallback)}catch(err){fallback()}
+  }
+  $('#r-copy').addEventListener('click',function(){copyText($('#r-text').value,'Enquiry copied.',$('#r-text'))});
+  $$('.copy').forEach(function(b){b.addEventListener('click',function(){copyText(b.dataset.copy,'Copied '+b.dataset.copy)})});
+})();
+</script>
+
+</body></html>
